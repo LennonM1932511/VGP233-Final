@@ -983,6 +983,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1200531320}
   - component: {fileID: 1200531319}
+  - component: {fileID: 1200531322}
+  - component: {fileID: 1200531321}
   m_Layer: 0
   m_Name: GameLoader
   m_TagString: Untagged
@@ -1003,6 +1005,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneIndexToLoad: 2
+  GameModules:
+  - {fileID: 1200531322}
+  - {fileID: 1200531321}
   UIManagerPrefab: {fileID: 6756060683709604405, guid: f52bbe20aa269f54aaf157db40e52962, type: 3}
   loadingScreen: {fileID: 691111044}
 --- !u!4 &1200531320
@@ -1019,6 +1024,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1200531321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200531318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990dec124aca6284090047f6518b526d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundResource: {fileID: 0}
+--- !u!114 &1200531322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200531318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a113035b23be947aadf0afe581cfdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToPool: []
 --- !u!1 &1635213032
 GameObject:
   m_ObjectHideFlags: 0
