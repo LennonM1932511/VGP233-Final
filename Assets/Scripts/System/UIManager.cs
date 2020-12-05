@@ -48,6 +48,16 @@ public class UIManager : MonoBehaviour
         _hud.UpdateBombs(bombs);
     }
 
+    public void UpdateKeysDisplay(string keyMessage)
+    {
+        _hud.UpdateKeys(keyMessage);
+    }
+
+    public void UpdateDataShardDisplay(string shardPercentage)
+    {
+        _hud.UpdateDataShard(shardPercentage);
+    }
+
     public void DisplayMessage(string message)
     {
         _hud.UpdateMessageText(message);

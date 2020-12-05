@@ -9,6 +9,8 @@ public class GameplayHUD : MonoBehaviour
     [SerializeField] private Text ScoreText = null;
     [SerializeField] private Text HealthText = null;
     [SerializeField] private Text BombText = null;
+    [SerializeField] private Text KeyText = null;
+    [SerializeField] private Text DataShardText = null;
 
     public void Initialize()
     {
@@ -37,6 +39,15 @@ public class GameplayHUD : MonoBehaviour
         BombText.text = bombs.ToString();
     }
 
+    public void UpdateKeys(string keyMessage)
+    {
+        KeyText.text = keyMessage;
+    }
+    public void UpdateDataShard(string shardMessage)
+    {
+        DataShardText.text = shardMessage;
+    }
+    
     public void UpdateMessageText(string message)
     {
         MessageText.text = message;
