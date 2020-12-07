@@ -27,24 +27,28 @@ public class PickUp : MonoBehaviour
         if (_health > 0)
         {
             ServiceLocator.Get<GameManager>().UpdateHealth(_health);
+            ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.Pickup_Health);
             Debug.Log("Player gained " + _health + " health!");
         }
 
         if (_bombs > 0)
         {
             ServiceLocator.Get<GameManager>().UpdateBombs(_bombs);
+            ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.Pickup_Grenade);
             Debug.Log("Player gained " + _bombs + " bombs!");
         }
 
         if (_keys > 0)
         {
             ServiceLocator.Get<GameManager>().UpdateKeys(_keys);
+            ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.Pickup_Key);
             Debug.Log("Player gained " + _keys + " keys!");
         }
 
         if (_dataShards > 0)
         {
             ServiceLocator.Get<GameManager>().UpdateDataShards(_dataShards);
+            ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.Pickup_Data);
             Debug.Log("Player gained " + _dataShards + " Data Shards!");
         }
 
