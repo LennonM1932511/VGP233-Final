@@ -24,6 +24,10 @@ public class Bomb : MonoBehaviour
         GameObject bomb = Instantiate(bombExplodePrefab, location, Quaternion.identity);
         explodeVFX.Play();
 
+        // LENNON:
+        // Play grenade explosion sfx
+        ServiceLocator.Get<SoundManager>().PlayAudioAtPosition(SoundManager.Sound.Weapon_Grenade_Explode, location);
+
         // for debugging/reporting
         int hitCount = 0;
 

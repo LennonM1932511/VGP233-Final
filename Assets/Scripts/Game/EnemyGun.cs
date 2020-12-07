@@ -13,5 +13,8 @@ public class EnemyGun : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, muzzleTransform.position, Quaternion.identity);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.AddForce(muzzleTransform.up * bulletVelocity, ForceMode.Force);
+        
+        // LENNON: play enemy shooting sfx at muzzle
+        ServiceLocator.Get<SoundManager>().PlayAudioAtPosition(SoundManager.Sound.Enemy_Shoot, muzzleTransform.position);
     }
 }

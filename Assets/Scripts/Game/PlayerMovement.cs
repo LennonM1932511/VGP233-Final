@@ -15,18 +15,23 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
-
+        
     private bool isGrounded;
     private Vector3 velocity;
-
+    
     // Update is called once per frame
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (isGrounded && velocity.y < 0.0f)
+        // LENNON:
+        // Not sure how/where to code in the landing sound yet
+        if (isGrounded)
         {
-            velocity.y = -2.0f;
+            if (velocity.y < 0.0f)
+            {
+                velocity.y = -2.0f;
+            }
         }
 
         float x = Input.GetAxis("Horizontal");
@@ -38,6 +43,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+            
+            // LENNON: play jump sfx
+            ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.Player_Jump);            
         }
 
         velocity.y += gravity * Time.deltaTime;

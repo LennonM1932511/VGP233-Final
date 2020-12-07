@@ -53,6 +53,9 @@ public class Gun : MonoBehaviour
         // play visual effect
         muzzleFlash.Play();
 
+        //play sfx for pistol
+        ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.Weapon_Pistol_Fire);
+
         // cast ray to see what the shot hits
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, cannonRange))
@@ -88,6 +91,8 @@ public class Gun : MonoBehaviour
         Rigidbody rb = bomb.GetComponent<Rigidbody>();
         rb.AddForce(muzzleTransform.forward * bombVelocity, ForceMode.Force);
         nextTimeToFire = Time.realtimeSinceStartup + fireRate;
+
+        ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.Weapon_Grenade_Fire);
 
         ServiceLocator.Get<GameManager>().UpdateBombs(-1);
     }
