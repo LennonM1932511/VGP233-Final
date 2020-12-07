@@ -33,6 +33,9 @@ public class DestructableObject : MonoBehaviour, IDamagable
             GameObject explosion = Instantiate(enemyExplodePrefab, transform.position, Quaternion.identity);
             enemyExplode.Play();
 
+            // play enemy explode sfx
+            ServiceLocator.Get<SoundManager>().PlayAudioAtPosition(SoundManager.Sound.Enemy_Explode, transform.position);
+
             // update log and HUD
             Debug.Log(transform.name + " is destroyed! You gain " + PointsValue.ToString() + " points!");
             ServiceLocator.Get<GameManager>().UpdateScore(PointsValue);
