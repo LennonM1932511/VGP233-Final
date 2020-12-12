@@ -16,6 +16,8 @@ public class EnemyNPC : MonoBehaviour
     private NavMeshAgent _agent = null;
     private EnemyGun _gun = null;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -40,6 +42,7 @@ public class EnemyNPC : MonoBehaviour
 
         if (distance < sightLimit)
         {
+            
             if (Physics.Raycast(gunObject.transform.position, gunObject.transform.up, out hit, 5000.0f))
             {
                 //Debug.Log(hit.transform.name);
@@ -49,6 +52,9 @@ public class EnemyNPC : MonoBehaviour
             {
                 if (distance < attackRange && hit.transform.name == "PlayerBody")
                 {
+                    animator.SetBool("isWalking", false);
+                    animator.SetBool("isShooting", true);
+
                     _agent.isStopped = true;
                     _agent.transform.LookAt(target);
                     if (nextAttackTime <= Time.realtimeSinceStartup)
@@ -60,6 +66,8 @@ public class EnemyNPC : MonoBehaviour
                 }
                 else
                 {
+                    animator.SetBool("isWalking", true);
+                    animator.SetBool("isShooting", false);
                     _agent.isStopped = false;
                     _agent.transform.LookAt(target);
                     _agent.SetDestination(target.position);
@@ -67,6 +75,9 @@ public class EnemyNPC : MonoBehaviour
             }
             else
             {
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isShooting", true);
+
                 _agent.isStopped = true;
                 _agent.transform.LookAt(target);
             }
