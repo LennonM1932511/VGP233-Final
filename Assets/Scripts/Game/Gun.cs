@@ -21,7 +21,7 @@ public class Gun : MonoBehaviour
     public GameObject bombPrefab;
     public GameObject cannonHitPrefab;
 
-    private float nextTimeToFire = 0.0f;
+    protected float nextTimeToFire = 0.0f;
 
     private void Awake()
     {
@@ -48,7 +48,7 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    protected virtual void Shoot()
     {
         // play visual effect
         muzzleFlash.Play();
@@ -66,7 +66,7 @@ public class Gun : MonoBehaviour
         }
 
         // only damagable objects are targets
-        IDamagable target = hit.transform.GetComponent<IDamagable>();
+        IDamagable target = hit.transform?.GetComponent<IDamagable>();
 
         // deal damage to target
         if (target != null)
