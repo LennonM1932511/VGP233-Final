@@ -11,7 +11,26 @@ public class GameManager : MonoBehaviour
         { 2, 24 }
     };
 
+    private static readonly Dictionary<int, int> _KeyPerLevel = new Dictionary<int, int>()
+    {
+        { 1, 3 },
+        { 2, 4 }
+    };
+
+    private static readonly Dictionary<int, int> _DataShardsPerLevel = new Dictionary<int, int>()
+    {
+        { 1, 3 },
+        { 2, 4 }
+    };
+
+
     private int _numKilled = 0;
+
+    private int _dataShards= 0;
+    public int DataShards { get { return _dataShards; } }
+
+    private int _currentKeys = 0;
+    public int CurrentKeys { get { return _currentKeys; } }
 
     private int _currentBombs = 0;
     public int CurrentBombs { get { return _currentBombs; } }
@@ -38,6 +57,8 @@ public class GameManager : MonoBehaviour
     private void OnGameLoaderComplete()
     {
         _uiManager = ServiceLocator.Get<UIManager>();
+        UpdateKeys(0);
+        UpdateDataShards(0);
     }
 
     private void SetLevel(int level)
@@ -56,6 +77,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(nextLevel);
         SetLevel(nextLevel);
         _numKilled = 0;
+        _currentKeys = 0;
+        _dataShards = 0;
+        UpdateKeys(0);
+        UpdateDataShards(0);
         _uiManager.DisplayMessage("");
     }
 
@@ -94,14 +119,31 @@ public class GameManager : MonoBehaviour
         _uiManager.UpdateBombsDisplay(_currentBombs);
     }
 
+    public void UpdateKeys(int keys)
+    {
+        _currentKeys += keys;
+        string keyText = _currentKeys + "/" + _KeyPerLevel[_currentLevel-1];
+        _uiManager.UpdateKeysDisplay(keyText);
+        CheckWinCondition();
+    }
+
+    public void UpdateDataShards(int shards)
+    {
+        _dataShards += shards;
+        float percentage = ((float)_dataShards / (float)_DataShardsPerLevel[_currentLevel - 1]) * 100.0f;
+        string shardText = System.Math.Round(percentage,0) + "\nPercent";
+        _uiManager.UpdateDataShardDisplay(shardText);
+        CheckWinCondition();
+    }
+
     private void CheckWinCondition()
     {
-        int numToWin = _killsByLevel[_currentLevel];
-        if (_numKilled >= numToWin)
+        int numToWin = _KeyPerLevel[_currentLevel - 1];
+        if (_currentKeys >= numToWin)
         {
             _uiManager.DisplayMessage("Level Completed");
-            Time.timeScale = 0;
-            //LoadNextLevel();
+            //Time.timeScale = 0;
+            LoadNextLevel();
         }
     }
 
@@ -110,7 +152,7 @@ public class GameManager : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _uiManager.DisplayMessage("GAME OVER");
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
         }
     }
 }
