@@ -1051,7 +1051,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a113035b23be947aadf0afe581cfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToPool: []
+  objectsToPool:
+  - name: Bombs
+    prefab: {fileID: 8082970139303990252, guid: d61127e655bd3404393b93e9823e4813, type: 3}
+    poolSize: 10
+  - name: BombExplosions
+    prefab: {fileID: 4300081999954321617, guid: 01080ace4411a2c4193a6bccbf543e94, type: 3}
+    poolSize: 10
+  - name: Bullets
+    prefab: {fileID: 2762522765311113646, guid: 80be839843a83144aa48a22dc3393e40, type: 3}
+    poolSize: 50
+  - name: CannonHits
+    prefab: {fileID: 5737670657691027983, guid: 45381f0a308cb8145afec4dfbdb8902e, type: 3}
+    poolSize: 50
 --- !u!114 &1200531323
 MonoBehaviour:
   m_ObjectHideFlags: 0

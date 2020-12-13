@@ -20,8 +20,8 @@ public class Bomb : MonoBehaviour
     {
         // get location of first contact of bomb
         Vector3 location = collision.GetContact(0).point;
-
-        GameObject bomb = Instantiate(bombExplodePrefab, location, Quaternion.identity);
+        
+        _ = Instantiate(bombExplodePrefab, location, Quaternion.identity);
         explodeVFX.Play();
 
         // LENNON:

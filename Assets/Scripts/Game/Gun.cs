@@ -90,7 +90,15 @@ public class Gun : MonoBehaviour
 
     private void LaunchBomb()
     {
-        GameObject bomb = Instantiate(bombPrefab, muzzleTransform.position, Quaternion.identity);
+        ObjectPool_Manager poolManager = ServiceLocator.Get<ObjectPool_Manager>();
+        GameObject bomb = poolManager.GetObjectFromPool("Bombs");
+        bomb.transform.position = muzzleTransform.position;
+        bomb.transform.rotation = Quaternion.identity;
+        bomb.SetActive(true);
+
+        //GameObject bomb = Instantiate(bombPrefab, muzzleTransform.position, Quaternion.identity);
+
+
         Rigidbody rb = bomb.GetComponent<Rigidbody>();
         rb.AddForce(muzzleTransform.forward * bombVelocity, ForceMode.Force);
         nextTimeToFire = Time.realtimeSinceStartup + fireRate;
