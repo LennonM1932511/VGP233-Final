@@ -33,19 +33,22 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // main cannon
-        if (Input.GetButton("Fire1") && nextTimeToFire <= Time.realtimeSinceStartup)
+        if (!PauseControl.gameIsPaused && !GameManager._isGameOver)
         {
-            Shoot();
-        }
+            // main cannon
+            if (Input.GetButton("Fire1") && nextTimeToFire <= Time.realtimeSinceStartup)
+            {
+                Shoot();
+            }
 
-        // launch bomb
-        if (Input.GetButton("Fire2")
-            && ServiceLocator.Get<GameManager>().CurrentBombs > 0
-            && nextTimeToFire <= Time.realtimeSinceStartup)
-        {
-            LaunchBomb();
-        }
+            // launch bomb
+            if (Input.GetButton("Fire2")
+                && ServiceLocator.Get<GameManager>().CurrentBombs > 0
+                && nextTimeToFire <= Time.realtimeSinceStartup)
+            {
+                LaunchBomb();
+            }
+        }        
     }
 
     protected virtual void Shoot()
