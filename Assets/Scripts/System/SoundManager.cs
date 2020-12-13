@@ -60,23 +60,6 @@ public class SoundManager : MonoBehaviour, IGameModule
         oneShotAudioSource.PlayOneShot(GetAudioClip(sound));
     }
 
-    public void PlayMusic(Sound sound)
-    {
-        // Play a looping music track at half volumn.         
-        if (oneShotGO == null)
-        {
-            oneShotGO = new GameObject("Music_" + sound.ToString());
-            oneShotAudioSource = oneShotGO.AddComponent<AudioSource>();
-            oneShotAudioSource.loop = true;
-            oneShotAudioSource.volume = 0.5f;
-            oneShotAudioSource.clip = GetAudioClip(sound);
-            oneShotAudioSource.Play();
-            return;
-        }
-        //oneShotAudioSource.PlayOneShot(GetAudioClip(sound));
-        oneShotAudioSource.Play();
-    }
-
     private AudioClip GetAudioClip(Sound sound)
     {
         Sounds resources = soundResource.GetComponent<Sounds>();
