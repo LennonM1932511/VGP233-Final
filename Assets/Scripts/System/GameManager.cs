@@ -9,23 +9,20 @@ public class GameManager : MonoBehaviour
 
     private static readonly Dictionary<int, int> _EnemiesPerLevel = new Dictionary<int, int>()
     {
-        { 1, 3 },
-        { 2, 30 },
-        { 3, 30 }
+        { 1, 30 },
+        { 2, 30 }
     };
 
     private static readonly Dictionary<int, int> _KeyPerLevel = new Dictionary<int, int>()
     {
         { 1, 3 },
-        { 2, 3 },
-        { 3, 3 }
+        { 2, 3 }
     };
 
     private static readonly Dictionary<int, int> _DataShardsPerLevel = new Dictionary<int, int>()
     {
         { 1, 3 },
-        { 2, 3 },
-        { 3, 4 }
+        { 2, 3 }
     };
 
     private int _numKilled = 0;
@@ -56,14 +53,13 @@ public class GameManager : MonoBehaviour
         SetLevel(startLevel);
         _currentHealth = _maxHealth;
         _isGameOver = false;
+        AudioListener.pause = false;
         return this;
     }
 
     private void OnGameLoaderComplete()
     {
         _uiManager = ServiceLocator.Get<UIManager>();
-        //UpdateKeys(0);
-        //UpdateDataShards(0);
     }
 
     private void SetLevel(int level)
@@ -75,7 +71,7 @@ public class GameManager : MonoBehaviour
     {
         int nextLevel = ++_currentLevel;
 
-        SceneManager.LoadScene(nextLevel);        
+        SceneManager.LoadScene(nextLevel);
         SetLevel(nextLevel);
         _numKilled = 0;
         _currentKeys = 0;
@@ -83,6 +79,12 @@ public class GameManager : MonoBehaviour
         UpdateKeys(0);
         UpdateDataShards(0);
         _uiManager.DisplayMessage("");
+        Time.timeScale = 1;
+
+        if (_isGameOver)
+        {
+            _isGameOver = false;
+        }
     }
 
     public void UpdateScore(int score)
@@ -120,7 +122,7 @@ public class GameManager : MonoBehaviour
     public void UpdateKeys(int keys)
     {
         _currentKeys += keys;
-        string keyText = _currentKeys + "/" + _KeyPerLevel[_currentLevel -1];
+        string keyText = _currentKeys + "/" + _KeyPerLevel[_currentLevel - 1];
         _uiManager.UpdateKeysDisplay(keyText);
         CheckWinCondition();
     }
@@ -128,20 +130,26 @@ public class GameManager : MonoBehaviour
     public void UpdateDataShards(int shards)
     {
         _dataShards += shards;
-        float percentage = ((float)_dataShards / (float)_DataShardsPerLevel[_currentLevel -1]) * 100.0f;
+        float percentage = ((float)_dataShards / (float)_DataShardsPerLevel[_currentLevel - 1]) * 100.0f;
         string shardText = System.Math.Round(percentage, 0) + "%";
         _uiManager.UpdateDataShardDisplay(shardText);
-        CheckWinCondition();
+    }
+
+    IEnumerator DelayLevelLoad(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        LoadNextLevel();        
     }
 
     private void CheckWinCondition()
     {
         int numToWin = _KeyPerLevel[_currentLevel - 1];
         if (_currentKeys >= numToWin)
-        {
+        {            
             _uiManager.DisplayMessage("LEVEL COMPLETED");
-            //Time.timeScale = 0;
-            LoadNextLevel();
+            ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.End_LevelComplete);
+            Time.timeScale = 0;
+            StartCoroutine(DelayLevelLoad(3.0f));
         }
     }
 
@@ -150,7 +158,8 @@ public class GameManager : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _uiManager.DisplayMessage("GAME OVER");
-            _isGameOver = true;
+            ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.End_GameOver);
+            _isGameOver = true;            
             Time.timeScale = 0;
         }
     }
