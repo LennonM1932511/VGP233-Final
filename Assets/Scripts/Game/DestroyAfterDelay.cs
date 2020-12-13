@@ -13,7 +13,7 @@ public class DestroyAfterDelay : MonoBehaviour
 
     private IEnumerator DelayedDestroy()
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delay);        
         Destroy(this.gameObject);
     }
 }
