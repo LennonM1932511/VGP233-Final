@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
         { 2, 3 }
     };
 
+    private static readonly Dictionary<int, string> _LevelMessage = new Dictionary<int, string>()
+    {
+        { 1, "PRESS MOUSE2\nTO THROW BOMBS" },
+        { 2, "NEW WEAPON\nPRESS Q TO SWITCH" }
+    };
+
     private int _numKilled = 0;
 
     private int _dataShards = 0;
@@ -71,20 +77,39 @@ public class GameManager : MonoBehaviour
     {
         int nextLevel = ++_currentLevel;
 
+        if (_isGameOver)
+        {
+            _isGameOver = false;
+            _currentHealth = 100.0f;
+            _currentScore = 0;
+            _currentBombs = 0;
+        }
+
         SceneManager.LoadScene(nextLevel);
         SetLevel(nextLevel);
         _numKilled = 0;
         _currentKeys = 0;
         _dataShards = 0;
+        UpdateHealth(0);
+        UpdateBombs(0);
         UpdateKeys(0);
         UpdateDataShards(0);
+        UpdateScore(0);
         _uiManager.DisplayMessage("");
         Time.timeScale = 1;
+        StartCoroutine(DisplayLevel());
+    }
 
-        if (_isGameOver)
+    IEnumerator DisplayLevel()
+    {
+        _uiManager.DisplayMessage("LEVEL " + (_currentLevel - 1).ToString() + "\nSTART!");
+        yield return new WaitForSecondsRealtime(2.0f);
+        if (_currentLevel > 1)
         {
-            _isGameOver = false;
+            _uiManager.DisplayMessage(_LevelMessage[_currentLevel - 1]);
+            yield return new WaitForSecondsRealtime(2.0f);
         }
+        _uiManager.DisplayMessage("");
     }
 
     public void UpdateScore(int score)
@@ -161,6 +186,8 @@ public class GameManager : MonoBehaviour
             ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.End_GameOver);
             _isGameOver = true;            
             Time.timeScale = 0;
+            SetLevel(_currentLevel - 1);            
+            StartCoroutine(DelayLevelLoad(3.0f));
         }
     }
 
