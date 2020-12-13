@@ -13,7 +13,7 @@ public class DestroyAfterDelay : MonoBehaviour
 
     private IEnumerator DelayedDestroy()
     {
-        yield return new WaitForSeconds(delay);        
-        Destroy(this.gameObject);
+        yield return new WaitForSeconds(delay);
+        ServiceLocator.Get<ObjectPool_Manager>().RecycleObject(gameObject);
     }
 }
