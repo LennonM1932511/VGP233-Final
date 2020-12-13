@@ -9,7 +9,7 @@ public class GameLoader : AsyncLoader
     public List<Component> GameModules;
     public GameObject UIManagerPrefab = null;
     public LoadingScreen loadingScreen = null;
-    private static int _sceneIndex = 2;
+    private static int _sceneIndex = 1;
     private static GameLoader _instance; //This only singleton that we should have
 
     protected override void Awake()

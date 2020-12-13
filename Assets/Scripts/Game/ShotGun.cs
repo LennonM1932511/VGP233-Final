@@ -17,7 +17,6 @@ public class ShotGun : Gun
         //play sfx for pistol
         ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.Weapon_Shotgun_Fire);
 
-
         for (int i = 0; i < cannonTotalBullets; i++)
         {
             // cast ray to see what the shot hits

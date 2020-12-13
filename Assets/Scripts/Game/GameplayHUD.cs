@@ -31,7 +31,7 @@ public class GameplayHUD : MonoBehaviour
     public void UpdateHealth(float health)
     {
         int roundHealth = Mathf.RoundToInt(health);
-        HealthText.text = roundHealth.ToString();
+        HealthText.text = roundHealth.ToString() + "%";
     }
 
     public void UpdateBombs(int bombs)

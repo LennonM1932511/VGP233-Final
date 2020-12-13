@@ -556,7 +556,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 21cdeac634456104cbafe709240402a1, type: 3}
+    m_Font: {fileID: 12800000, guid: 0f42d218d0151ce4d928e93d49dd1dfd, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -799,7 +799,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 21cdeac634456104cbafe709240402a1, type: 3}
+    m_Font: {fileID: 12800000, guid: 0f42d218d0151ce4d928e93d49dd1dfd, type: 3}
     m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 1
@@ -985,6 +985,7 @@ GameObject:
   - component: {fileID: 1200531319}
   - component: {fileID: 1200531322}
   - component: {fileID: 1200531321}
+  - component: {fileID: 1200531323}
   m_Layer: 0
   m_Name: GameLoader
   m_TagString: Untagged
@@ -1004,10 +1005,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5ee8ffada13ba449c8f98476c6d0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndexToLoad: 2
+  sceneIndexToLoad: 1
   GameModules:
   - {fileID: 1200531322}
   - {fileID: 1200531321}
+  - {fileID: 1200531323}
   UIManagerPrefab: {fileID: 6756060683709604405, guid: f52bbe20aa269f54aaf157db40e52962, type: 3}
   loadingScreen: {fileID: 691111044}
 --- !u!4 &1200531320
@@ -1050,6 +1052,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToPool: []
+--- !u!114 &1200531323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200531318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ce2f045764bff49b95fe5527598d07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1635213032
 GameObject:
   m_ObjectHideFlags: 0

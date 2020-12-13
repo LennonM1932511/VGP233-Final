@@ -5,28 +5,32 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private static readonly Dictionary<int, int> _killsByLevel = new Dictionary<int, int>()
+    public static bool _isGameOver;
+
+    private static readonly Dictionary<int, int> _EnemiesPerLevel = new Dictionary<int, int>()
     {
-        { 1, 16 },
-        { 2, 24 }
+        { 1, 3 },
+        { 2, 30 },
+        { 3, 30 }
     };
 
     private static readonly Dictionary<int, int> _KeyPerLevel = new Dictionary<int, int>()
     {
         { 1, 3 },
-        { 2, 4 }
+        { 2, 3 },
+        { 3, 3 }
     };
 
     private static readonly Dictionary<int, int> _DataShardsPerLevel = new Dictionary<int, int>()
     {
         { 1, 3 },
-        { 2, 4 }
+        { 2, 3 },
+        { 3, 4 }
     };
-
 
     private int _numKilled = 0;
 
-    private int _dataShards= 0;
+    private int _dataShards = 0;
     public int DataShards { get { return _dataShards; } }
 
     private int _currentKeys = 0;
@@ -51,14 +55,15 @@ public class GameManager : MonoBehaviour
         GameLoader.CallOnComplete(OnGameLoaderComplete);
         SetLevel(startLevel);
         _currentHealth = _maxHealth;
+        _isGameOver = false;
         return this;
     }
 
     private void OnGameLoaderComplete()
     {
         _uiManager = ServiceLocator.Get<UIManager>();
-        UpdateKeys(0);
-        UpdateDataShards(0);
+        //UpdateKeys(0);
+        //UpdateDataShards(0);
     }
 
     private void SetLevel(int level)
@@ -66,15 +71,11 @@ public class GameManager : MonoBehaviour
         _currentLevel = level;
     }
 
-    private void LoadNextLevel()
+    public void LoadNextLevel()
     {
         int nextLevel = ++_currentLevel;
-        if (nextLevel > _killsByLevel.Count)
-        {
-            _uiManager.DisplayMessage("YOU WIN!");
-        }
 
-        SceneManager.LoadScene(nextLevel);
+        SceneManager.LoadScene(nextLevel);        
         SetLevel(nextLevel);
         _numKilled = 0;
         _currentKeys = 0;
@@ -88,13 +89,11 @@ public class GameManager : MonoBehaviour
     {
         _currentScore += score;
         _uiManager.UpdateScoreDisplay(_currentScore);
-        CheckWinCondition();
     }
 
     public void UpdateKills()
     {
         ++_numKilled;
-        CheckWinCondition();
     }
 
     public void UpdateHealth(float health)
@@ -104,13 +103,12 @@ public class GameManager : MonoBehaviour
         {
             _currentHealth = _maxHealth;
         }
-        else if (_currentHealth < 0)
+        else if (_currentHealth <= 0)
         {
             _currentHealth = 0;
+            CheckLoseCondition();
         }
         _uiManager.UpdateHealthDisplay(_currentHealth);
-
-        CheckLoseCondition();
     }
 
     public void UpdateBombs(int bombs)
@@ -122,7 +120,7 @@ public class GameManager : MonoBehaviour
     public void UpdateKeys(int keys)
     {
         _currentKeys += keys;
-        string keyText = _currentKeys + "/" + _KeyPerLevel[_currentLevel-1];
+        string keyText = _currentKeys + "/" + _KeyPerLevel[_currentLevel -1];
         _uiManager.UpdateKeysDisplay(keyText);
         CheckWinCondition();
     }
@@ -130,8 +128,8 @@ public class GameManager : MonoBehaviour
     public void UpdateDataShards(int shards)
     {
         _dataShards += shards;
-        float percentage = ((float)_dataShards / (float)_DataShardsPerLevel[_currentLevel - 1]) * 100.0f;
-        string shardText = System.Math.Round(percentage,0) + "\nPercent";
+        float percentage = ((float)_dataShards / (float)_DataShardsPerLevel[_currentLevel -1]) * 100.0f;
+        string shardText = System.Math.Round(percentage, 0) + "%";
         _uiManager.UpdateDataShardDisplay(shardText);
         CheckWinCondition();
     }
@@ -141,7 +139,7 @@ public class GameManager : MonoBehaviour
         int numToWin = _KeyPerLevel[_currentLevel - 1];
         if (_currentKeys >= numToWin)
         {
-            _uiManager.DisplayMessage("Level Completed");
+            _uiManager.DisplayMessage("LEVEL COMPLETED");
             //Time.timeScale = 0;
             LoadNextLevel();
         }
@@ -152,7 +150,20 @@ public class GameManager : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _uiManager.DisplayMessage("GAME OVER");
-            //Time.timeScale = 0;
+            _isGameOver = true;
+            Time.timeScale = 0;
+        }
+    }
+
+    public void DisplayPauseMenu()
+    {
+        if (PauseControl.gameIsPaused)
+        {
+            _uiManager.DisplayMessage("PAUSED");
+        }
+        else
+        {
+            _uiManager.DisplayMessage("");
         }
     }
 }
