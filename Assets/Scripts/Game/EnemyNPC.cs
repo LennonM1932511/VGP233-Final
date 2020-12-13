@@ -42,7 +42,7 @@ public class EnemyNPC : MonoBehaviour
 
         if (distance < sightLimit)
         {
-            
+
             if (Physics.Raycast(gunObject.transform.position, gunObject.transform.up, out hit, 5000.0f))
             {
                 //Debug.Log(hit.transform.name);

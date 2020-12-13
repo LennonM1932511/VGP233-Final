@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuControl : MonoBehaviour
-{
-  public void ButtonStart()
-    {
-        SceneManager.LoadScene(1);
+{    
+    public void ButtonStart()
+    {   
+        ServiceLocator.Get<GameManager>().LoadNextLevel();
     }
 
     public void ButtonExit()

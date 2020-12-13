@@ -27,10 +27,10 @@ public class GunManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q) && ServiceLocator.Get<GameManager>().CurrentLevel-2 >= (currentGunIndex + 1) % guns.Count)
+        if (Input.GetKeyDown(KeyCode.Q) && ServiceLocator.Get<GameManager>().CurrentLevel - 2 >= (currentGunIndex + 1) % guns.Count)
         {
             currentGun.SetActive(false);
-            currentGunIndex = (currentGunIndex+1) % guns.Count;
+            currentGunIndex = (currentGunIndex + 1) % guns.Count;
 
             currentGun = guns[currentGunIndex];
             currentGun.SetActive(true);

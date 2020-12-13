@@ -48,7 +48,7 @@ public class Gun : MonoBehaviour
             {
                 LaunchBomb();
             }
-        }        
+        }
     }
 
     protected virtual void Shoot()

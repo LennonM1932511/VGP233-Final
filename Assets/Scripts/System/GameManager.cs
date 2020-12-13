@@ -6,17 +6,26 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static bool _isGameOver;
-    
+
+    private static readonly Dictionary<int, int> _EnemiesPerLevel = new Dictionary<int, int>()
+    {
+        { 1, 3 },
+        { 2, 30 },
+        { 3, 30 }
+    };
+
     private static readonly Dictionary<int, int> _KeyPerLevel = new Dictionary<int, int>()
     {
         { 1, 3 },
-        { 2, 3 }
+        { 2, 3 },
+        { 3, 3 }
     };
 
     private static readonly Dictionary<int, int> _DataShardsPerLevel = new Dictionary<int, int>()
     {
         { 1, 3 },
-        { 2, 4 }
+        { 2, 3 },
+        { 3, 4 }
     };
 
     private int _numKilled = 0;
@@ -53,8 +62,8 @@ public class GameManager : MonoBehaviour
     private void OnGameLoaderComplete()
     {
         _uiManager = ServiceLocator.Get<UIManager>();
-        UpdateKeys(0);
-        UpdateDataShards(0);
+        //UpdateKeys(0);
+        //UpdateDataShards(0);
     }
 
     private void SetLevel(int level)
@@ -62,11 +71,11 @@ public class GameManager : MonoBehaviour
         _currentLevel = level;
     }
 
-    private void LoadNextLevel()
+    public void LoadNextLevel()
     {
         int nextLevel = ++_currentLevel;
 
-        SceneManager.LoadScene(nextLevel);
+        SceneManager.LoadScene(nextLevel);        
         SetLevel(nextLevel);
         _numKilled = 0;
         _currentKeys = 0;
@@ -111,7 +120,7 @@ public class GameManager : MonoBehaviour
     public void UpdateKeys(int keys)
     {
         _currentKeys += keys;
-        string keyText = _currentKeys + "/" + _KeyPerLevel[_currentLevel - 1];
+        string keyText = _currentKeys + "/" + _KeyPerLevel[_currentLevel -1];
         _uiManager.UpdateKeysDisplay(keyText);
         CheckWinCondition();
     }
@@ -119,7 +128,7 @@ public class GameManager : MonoBehaviour
     public void UpdateDataShards(int shards)
     {
         _dataShards += shards;
-        float percentage = ((float)_dataShards / (float)_DataShardsPerLevel[_currentLevel - 1]) * 100.0f;
+        float percentage = ((float)_dataShards / (float)_DataShardsPerLevel[_currentLevel -1]) * 100.0f;
         string shardText = System.Math.Round(percentage, 0) + "%";
         _uiManager.UpdateDataShardDisplay(shardText);
         CheckWinCondition();
