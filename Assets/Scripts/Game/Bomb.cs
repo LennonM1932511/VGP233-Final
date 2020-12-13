@@ -45,33 +45,35 @@ public class Bomb : MonoBehaviour
         foreach (var col in objectsInRange)
         {
             // check if the object is an enemy
-            EnemyNPC enemy = col.GetComponent<EnemyNPC>();
-            if (enemy != null)
+            //EnemyNPC enemy = col.GetComponent<EnemyNPC>();
+            IDamagable enemy = col.GetComponent<IDamagable>();
+            if (enemy != null && col.name != "Player")
             {
                 // test if enemy is exposed to blast, or behind cover
                 RaycastHit hit;
                 var exposed = false;
-                if (Physics.Raycast(location, (enemy.transform.position - location), out hit))
+                if (Physics.Raycast(location, (col.transform.position - location), out hit))
                 {
-                    exposed = (hit.collider == enemy.GetComponent<Collider>());
+                    exposed = (hit.collider == col.GetComponent<Collider>());
                 }
 
                 if (exposed)
                 {
                     // damage enemy with a linear falloff
-                    float proximity = (location - enemy.transform.position).magnitude;
+                    float proximity = (location - col.transform.position).magnitude;
                     float effect = 1 - (proximity / bombRadius);
                     float damage = bombDamage * effect;
 
-                    enemy.GetComponent<IDamagable>().TakeDamage(damage);
+                    enemy.TakeDamage(damage);
 
                     ++hitCount;
-                    Debug.Log(enemy.transform.name + " was " + Mathf.RoundToInt(proximity).ToString() + " from the blast.");
+                    Debug.Log(col.transform.name + " was " + Mathf.RoundToInt(proximity).ToString() + " from the blast.");
                 }
             }
         }
         // destroy bomb on collision
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        ServiceLocator.Get<ObjectPool_Manager>().RecycleObject(gameObject);
 
         Debug.Log("Bomb exploded on " + collision.transform.name + ", hitting " + hitCount.ToString() + " enemies.");
     }

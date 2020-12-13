@@ -10,8 +10,16 @@ public class EnemyGun : MonoBehaviour
 
     public void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, muzzleTransform.position, Quaternion.identity);
+        ObjectPool_Manager poolManager = ServiceLocator.Get<ObjectPool_Manager>();
+        GameObject bullet = poolManager.GetObjectFromPool("Bullets");
+        bullet.transform.position = muzzleTransform.position;
+        bullet.transform.rotation = Quaternion.identity;
+        bullet.SetActive(true);
+
+        //GameObject bullet = Instantiate(bulletPrefab, muzzleTransform.position, Quaternion.identity);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        Vector3 reset = new Vector3(0f, 0f, 0f);
+        rb.velocity = reset;
         rb.AddForce(muzzleTransform.up * bulletVelocity, ForceMode.Force);
         
         // LENNON: play enemy shooting sfx at muzzle
