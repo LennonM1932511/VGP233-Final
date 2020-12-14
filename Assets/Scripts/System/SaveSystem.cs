@@ -72,6 +72,11 @@ public class SaveSystem : MonoBehaviour, IGameModule
         return PlayerPrefs.GetString(key, "");
     }
 
+    public float LoadFloat(string key)
+    {
+        return PlayerPrefs.GetFloat(key, 0.0f);
+    }
+
     // Clear PlayerPrefs
 
     public void ClearKey(string key)
