@@ -76,7 +76,7 @@ public class EnemyNPC : MonoBehaviour
             else
             {
                 animator.SetBool("isWalking", false);
-                animator.SetBool("isShooting", true);
+                animator.SetBool("isShooting", false);
 
                 _agent.isStopped = true;
                 _agent.transform.LookAt(target);

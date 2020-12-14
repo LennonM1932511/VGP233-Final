@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 
     private static readonly Dictionary<int, int> _EnemiesPerLevel = new Dictionary<int, int>()
     {
-        { 1, 9 },
-        { 2, 14 }
+        { 1, 13 },
+        { 2, 15 }
     };
 
     private static readonly Dictionary<int, int> _KeyPerLevel = new Dictionary<int, int>()
@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
     };
 
     private int _numKilled = 0;
+    public int TotalKills { get { return _numKilled; } }
+
+    private int _totalDataShards = 0;
+    public int TotalDataShards { get { return _totalDataShards; } }
 
     private int _dataShards = 0;
     public int DataShards { get { return _dataShards; } }
@@ -59,6 +63,7 @@ public class GameManager : MonoBehaviour
         SetLevel(startLevel);
         _currentHealth = _maxHealth;
         _isGameOver = false;
+        _totalDataShards = 0;
         AudioListener.pause = false;
         return this;
     }
@@ -68,7 +73,7 @@ public class GameManager : MonoBehaviour
         _uiManager = ServiceLocator.Get<UIManager>();
     }
 
-    private void SetLevel(int level)
+    public void SetLevel(int level)
     {
         _currentLevel = level;
     }
@@ -77,27 +82,40 @@ public class GameManager : MonoBehaviour
     {
         int nextLevel = ++_currentLevel;
 
+        // Save player score between levels for reinstating on death, as well as a penalty
+        ServiceLocator.Get<SaveSystem>().SavePlayerPrefs(_currentScore, "tempscore");
+        ServiceLocator.Get<SaveSystem>().SavePlayerPrefs((_currentScore * 0.25f), "penalty");
+
         if (_isGameOver)
         {
             _isGameOver = false;
             _currentHealth = 100.0f;
-            _currentScore = 0;
+            _currentScore = ServiceLocator.Get<SaveSystem>().LoadInt("tempscore");
+            _currentScore -= (int)ServiceLocator.Get<SaveSystem>().LoadFloat("penalty");
             _currentBombs = 0;
+            _numKilled = 0;
+            _totalDataShards = 0;
         }
 
         SceneManager.LoadScene(nextLevel);
         SetLevel(nextLevel);
-        _numKilled = 0;
-        _currentKeys = 0;
-        _dataShards = 0;
-        UpdateHealth(0);
-        UpdateBombs(0);
-        UpdateKeys(0);
-        UpdateDataShards(0);
-        UpdateScore(0);
-        _uiManager.DisplayMessage("");
         Time.timeScale = 1;
-        StartCoroutine(DisplayLevel());
+
+        _totalDataShards += _dataShards;
+
+        if (CurrentLevel < 4 && CurrentLevel > 1)
+        {
+            _currentKeys = 0;
+            _dataShards = 0;
+            UpdateHealth(0);
+            UpdateBombs(0);
+            UpdateKeys(0);
+            UpdateDataShards(0);
+            UpdateScore(0);
+            _uiManager.DisplayMessage("");
+            StartCoroutine(DisplayLevel());
+        }
+
     }
 
     IEnumerator DisplayLevel()
@@ -162,15 +180,16 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DelayLevelLoad(float delay)
     {
+        // Delay loading next level while showing messages
         yield return new WaitForSecondsRealtime(delay);
-        LoadNextLevel();        
+        LoadNextLevel();
     }
 
     private void CheckWinCondition()
     {
         int numToWin = _KeyPerLevel[_currentLevel - 1];
         if (_currentKeys >= numToWin)
-        {            
+        {
             _uiManager.DisplayMessage("LEVEL COMPLETED");
             ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.End_LevelComplete);
             Time.timeScale = 0;
@@ -182,11 +201,11 @@ public class GameManager : MonoBehaviour
     {
         if (_currentHealth <= 0)
         {
-            _uiManager.DisplayMessage("GAME OVER");
+            _uiManager.DisplayMessage("SYSTEM FAILURE\nREBOOTING...");
             ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.End_GameOver);
-            _isGameOver = true;            
+            _isGameOver = true;
             Time.timeScale = 0;
-            SetLevel(_currentLevel - 1);            
+            SetLevel(_currentLevel - 1);
             StartCoroutine(DelayLevelLoad(3.0f));
         }
     }
@@ -201,5 +220,5 @@ public class GameManager : MonoBehaviour
         {
             _uiManager.DisplayMessage("");
         }
-    }
+    }    
 }

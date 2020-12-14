@@ -986,6 +986,7 @@ GameObject:
   - component: {fileID: 1200531322}
   - component: {fileID: 1200531321}
   - component: {fileID: 1200531323}
+  - component: {fileID: 1200531324}
   m_Layer: 0
   m_Name: GameLoader
   m_TagString: Untagged
@@ -1009,6 +1010,7 @@ MonoBehaviour:
   GameModules:
   - {fileID: 1200531322}
   - {fileID: 1200531321}
+  - {fileID: 1200531324}
   - {fileID: 1200531323}
   UIManagerPrefab: {fileID: 6756060683709604405, guid: f52bbe20aa269f54aaf157db40e52962, type: 3}
   loadingScreen: {fileID: 691111044}
@@ -1074,6 +1076,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33ce2f045764bff49b95fe5527598d07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1200531324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200531318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b62554bff0acb0e4d9a85b3482b0d667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1635213032
