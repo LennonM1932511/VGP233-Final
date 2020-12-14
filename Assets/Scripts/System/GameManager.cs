@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 
     private static readonly Dictionary<int, int> _EnemiesPerLevel = new Dictionary<int, int>()
     {
-        { 1, 30 },
-        { 2, 30 }
+        { 1, 9 },
+        { 2, 14 }
     };
 
     private static readonly Dictionary<int, int> _KeyPerLevel = new Dictionary<int, int>()
@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour
 
     private static readonly Dictionary<int, int> _DataShardsPerLevel = new Dictionary<int, int>()
     {
-        { 1, 3 },
-        { 2, 3 }
+        { 1, 100 },
+        { 2, 100 }
     };
 
     private static readonly Dictionary<int, string> _LevelMessage = new Dictionary<int, string>()
