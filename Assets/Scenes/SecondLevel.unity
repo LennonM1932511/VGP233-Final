@@ -9982,6 +9982,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2398365910073268117, guid: 0048fdc8bf117459687a9a15a82e5bef, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2398365910186662949, guid: 0048fdc8bf117459687a9a15a82e5bef, type: 3}
       propertyPath: m_NavMeshLayer
       value: 2
@@ -10042,11 +10046,23 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2398365910502189079, guid: 0048fdc8bf117459687a9a15a82e5bef, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2398365910612430703, guid: 0048fdc8bf117459687a9a15a82e5bef, type: 3}
       propertyPath: m_NavMeshLayer
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2398365910649600194, guid: 0048fdc8bf117459687a9a15a82e5bef, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398365910843341536, guid: 0048fdc8bf117459687a9a15a82e5bef, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398365910881005962, guid: 0048fdc8bf117459687a9a15a82e5bef, type: 3}
       propertyPath: m_NavMeshLayer
       value: 2
       objectReference: {fileID: 0}
@@ -10057,6 +10073,10 @@ PrefabInstance:
     - target: {fileID: 2398365911497058301, guid: 0048fdc8bf117459687a9a15a82e5bef, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398365911571276561, guid: 0048fdc8bf117459687a9a15a82e5bef, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2398365911694767781, guid: 0048fdc8bf117459687a9a15a82e5bef, type: 3}
       propertyPath: m_StaticEditorFlags

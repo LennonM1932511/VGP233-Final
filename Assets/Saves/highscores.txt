@@ -1,0 +1,1 @@
+{"highscoreEntryList":[{"score":777777,"name":"LMM"},{"score":80085,"name":"EVE"},{"score":66666,"name":"HEL"},{"score":55555,"name":"FYV"},{"score":31423,"name":"CAT"},{"score":23456,"name":"GWN"},{"score":22222,"name":"BEV"},{"score":12345,"name":"ABE"},{"score":230,"name":"DAN"},{"score":10000,"name":"POG"}]}

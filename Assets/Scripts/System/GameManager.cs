@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     private static readonly Dictionary<int, int> _EnemiesPerLevel = new Dictionary<int, int>()
     {
-        { 1, 9 },
+        { 1, 12 },
         { 2, 14 }
     };
 
