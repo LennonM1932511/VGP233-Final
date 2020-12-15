@@ -277,9 +277,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 3874700955938945728, guid: cf451127749f81247b771d5407b0005b, type: 3}
   gunObject: {fileID: 8568022128978440644}
-  sightLimit: 24
-  chaseRange: 16
-  attackRange: 12
+  sightLimit: 36
+  chaseRange: 24
+  attackRange: 20
   attackRate: 1
   animator: {fileID: 6222900055372029105}
 --- !u!114 &67179866156201544
@@ -307,7 +307,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7012330241867889557}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -316,7 +316,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 3
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -347,7 +347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8568022128978440644}
   m_LocalRotation: {x: -1, y: -0, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: -1.00666, z: 0}
+  m_LocalPosition: {x: 0, y: -2.69, z: -0.08}
   m_LocalScale: {x: 0.7499999, y: 0.0066666664, z: 0.7499999}
   m_Children:
   - {fileID: 2594848955210912230}
