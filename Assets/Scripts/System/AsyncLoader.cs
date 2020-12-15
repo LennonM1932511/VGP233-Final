@@ -50,19 +50,19 @@ public abstract class AsyncLoader : MonoBehaviour
         var running = new Queue<RoutineInfo>(_pending);
         _pending.Clear();
 
-        foreach(var routineInfo in running)
+        foreach (var routineInfo in running)
         {
             outOf += routineInfo.weight;
         }
 
-        while(running.Count != 0)
+        while (running.Count != 0)
         {
             var routineInfo = running.Dequeue();
             var routine = routineInfo.routine;
 
             while (routine.MoveNext())
             {
-                if(routineInfo.progress != null)
+                if (routineInfo.progress != null)
                 {
                     var routinePercent = routineInfo.progress() * (float)routineInfo.weight / (float)outOf;
                     Progress = percentCompleteByFullSections + routinePercent;

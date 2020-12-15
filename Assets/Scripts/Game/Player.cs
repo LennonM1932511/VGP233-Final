@@ -12,6 +12,6 @@ public class Player : MonoBehaviour, IDamagable
 
     public void HealDamage(float health)
     {
-        ServiceLocator.Get<GameManager>().UpdateHealth(health);        
+        ServiceLocator.Get<GameManager>().UpdateHealth(health);
     }
 }

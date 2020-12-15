@@ -21,7 +21,7 @@ public class EnemyGun : MonoBehaviour
         Vector3 reset = new Vector3(0f, 0f, 0f);
         rb.velocity = reset;
         rb.AddForce(muzzleTransform.up * bulletVelocity, ForceMode.Force);
-        
+
         // LENNON: play enemy shooting sfx at muzzle
         ServiceLocator.Get<SoundManager>().PlayAudioAtPosition(SoundManager.Sound.Enemy_Shoot, muzzleTransform.position);
     }

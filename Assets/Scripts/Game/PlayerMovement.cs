@@ -15,10 +15,10 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
-        
+
     private bool isGrounded;
     private Vector3 velocity;
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
                 // LENNON: play jump sfx
                 ServiceLocator.Get<SoundManager>().PlayAudio(SoundManager.Sound.Player_Jump);
             }
-        }        
+        }
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);

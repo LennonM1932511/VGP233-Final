@@ -8,7 +8,7 @@ public class GameStats : MonoBehaviour
     [SerializeField] private Text dataText = null;
     [SerializeField] private Text killsText = null;
     [SerializeField] private Text scoreText = null;
-        
+
     private void Awake()
     {
         // Calculate and display final data shards percentage
@@ -29,7 +29,7 @@ public class GameStats : MonoBehaviour
         Debug.Log("Player got a score of " + totalScore);
 
         // Create new high score and load previous best score
-        HighScore finalScore = new HighScore{ highScore = totalScore };
+        HighScore finalScore = new HighScore { highScore = totalScore };
         HighScore bestScore = ServiceLocator.Get<SaveSystem>().LoadJSON<HighScore>("highscore.txt");
 
         // compare scores and store if new score is higher

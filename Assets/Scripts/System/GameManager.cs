@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
             _currentHealth = 100.0f;
             _numKilled = ServiceLocator.Get<SaveSystem>().LoadInt("tempkills");
             _totalDataShards = ServiceLocator.Get<SaveSystem>().LoadInt("tempdatashards");
-            _currentScore = ServiceLocator.Get<SaveSystem>().LoadInt("tempscore");            
+            _currentScore = ServiceLocator.Get<SaveSystem>().LoadInt("tempscore");
             _currentScore -= (int)ServiceLocator.Get<SaveSystem>().LoadFloat("penalty");
             _currentBombs = 0;
             _numKilled = 0;
@@ -225,5 +225,5 @@ public class GameManager : MonoBehaviour
         {
             _uiManager.DisplayMessage("");
         }
-    }    
+    }
 }

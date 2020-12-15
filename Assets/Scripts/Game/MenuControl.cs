@@ -10,10 +10,10 @@ public class MenuControl : MonoBehaviour
     private HighScore highscore;
 
     private void Awake()
-    {        
+    {
         highscore = ServiceLocator.Get<SaveSystem>().LoadJSON<HighScore>("highscore.txt");
 
-        if ( highscore.highScore > 0)
+        if (highscore.highScore > 0)
         {
             highscoreText.GetComponent<Text>().text = highscore.highScore.ToString();
         }
@@ -21,7 +21,7 @@ public class MenuControl : MonoBehaviour
     }
 
     public void ButtonStart()
-    {   
+    {
         ServiceLocator.Get<GameManager>().LoadNextLevel();
     }
 
