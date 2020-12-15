@@ -5,7 +5,7 @@ using UnityEngine;
 public class MouseLook : MonoBehaviour
 {
     public Transform playerBody;
-    public float mouseSensitivity = 500.0f;    
+    public float mouseSensitivity = 500.0f;
     public float minAngle = -90.0f;
     public float maxAngle = 90.0f;
 

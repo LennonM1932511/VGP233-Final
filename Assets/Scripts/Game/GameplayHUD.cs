@@ -47,7 +47,7 @@ public class GameplayHUD : MonoBehaviour
     {
         DataShardText.text = shardMessage;
     }
-    
+
     public void UpdateMessageText(string message)
     {
         MessageText.text = message;

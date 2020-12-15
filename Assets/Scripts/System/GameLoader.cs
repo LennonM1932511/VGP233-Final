@@ -110,7 +110,7 @@ public class GameLoader : AsyncLoader
     private IEnumerator InitializeModularSystems(Transform systemsParent)
     {
         Debug.Log("Loading modular systems...");
-        
+
         foreach (Component c in GameModules)
         {
             if (c is IGameModule)

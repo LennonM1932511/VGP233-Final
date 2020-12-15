@@ -21,7 +21,7 @@ public class GunManager : MonoBehaviour
                 go.SetActive(false);
             }
         }
-        currentGunIndex = guns.FindIndex((g) => g == currentGun);       
+        currentGunIndex = guns.FindIndex((g) => g == currentGun);
     }
 
 
@@ -33,7 +33,7 @@ public class GunManager : MonoBehaviour
             currentGun.SetActive(false);
             currentGunIndex = (currentGunIndex + 1) % guns.Count;
 
-            currentGun = guns[currentGunIndex];            
+            currentGun = guns[currentGunIndex];
             currentGun.SetActive(true);
         }
     }

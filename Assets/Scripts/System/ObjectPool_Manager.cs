@@ -14,7 +14,7 @@ public class ObjectPool_Manager : MonoBehaviour, IGameModule
     }
 
     public List<PooledObject> objectsToPool = new List<PooledObject>();
-    
+
     private bool _isInitialized = false;
     public bool IsInitialized { get { return _isInitialized; } }
 
@@ -61,7 +61,7 @@ public class ObjectPool_Manager : MonoBehaviour, IGameModule
         return new List<GameObject>();
     }
 
-    public void RecycleObject(GameObject go) 
+    public void RecycleObject(GameObject go)
     {
         go.SetActive(false);
     }
@@ -94,7 +94,7 @@ public class ObjectPool_Manager : MonoBehaviour, IGameModule
     {
         GameObject PoolManagerGO = new GameObject("Object Pool");
         PoolManagerGO.transform.SetParent(GameObject.FindWithTag("Services").transform);
-        foreach(PooledObject poolObj in objectsToPool)
+        foreach (PooledObject poolObj in objectsToPool)
         {
             if (!_objectPoolByName.ContainsKey(poolObj.name))
             {

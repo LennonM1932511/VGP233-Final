@@ -60,7 +60,7 @@ public class EnemyNPC : MonoBehaviour
                     if (nextAttackTime <= Time.realtimeSinceStartup)
                     {
                         _gun.Shoot();
-                        nextAttackTime = Time.realtimeSinceStartup + attackRate;                        
+                        nextAttackTime = Time.realtimeSinceStartup + attackRate;
                     }
 
                 }
@@ -70,7 +70,7 @@ public class EnemyNPC : MonoBehaviour
                     animator.SetBool("isShooting", false);
                     _agent.isStopped = false;
                     _agent.transform.LookAt(target);
-                    _agent.SetDestination(target.position);                    
+                    _agent.SetDestination(target.position);
                 }
             }
             else
