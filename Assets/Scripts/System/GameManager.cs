@@ -85,12 +85,17 @@ public class GameManager : MonoBehaviour
         // Save player score between levels for reinstating on death, as well as a penalty
         ServiceLocator.Get<SaveSystem>().SavePlayerPrefs(_currentScore, "tempscore");
         ServiceLocator.Get<SaveSystem>().SavePlayerPrefs((_currentScore * 0.25f), "penalty");
+        ServiceLocator.Get<SaveSystem>().SavePlayerPrefs(_numKilled, "tempkills");
+        ServiceLocator.Get<SaveSystem>().SavePlayerPrefs(_totalDataShards, "tempdatashards");
+
 
         if (_isGameOver)
         {
             _isGameOver = false;
             _currentHealth = 100.0f;
-            _currentScore = ServiceLocator.Get<SaveSystem>().LoadInt("tempscore");
+            _numKilled = ServiceLocator.Get<SaveSystem>().LoadInt("tempkills");
+            _totalDataShards = ServiceLocator.Get<SaveSystem>().LoadInt("tempdatashards");
+            _currentScore = ServiceLocator.Get<SaveSystem>().LoadInt("tempscore");            
             _currentScore -= (int)ServiceLocator.Get<SaveSystem>().LoadFloat("penalty");
             _currentBombs = 0;
             _numKilled = 0;
