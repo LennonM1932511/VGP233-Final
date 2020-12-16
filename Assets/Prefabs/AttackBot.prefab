@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1b82d858425a64b861864478f9ff1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  MaxHealth: 30
   PointsValue: 100
   enemyExplodePrefab: {fileID: 4528183141054071445, guid: 90ad951f5ff8f474bb391d4a17c0e354, type: 3}
   enemyExplode: {fileID: 952225466880942941, guid: 90ad951f5ff8f474bb391d4a17c0e354, type: 3}
