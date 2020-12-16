@@ -279,8 +279,8 @@ MonoBehaviour:
   gunObject: {fileID: 8568022128978440644}
   sightLimit: 36
   chaseRange: 24
-  attackRange: 20
-  attackRate: 1
+  attackRange: 10
+  attackRate: 2
   animator: {fileID: 6222900055372029105}
 --- !u!114 &67179866156201544
 MonoBehaviour:

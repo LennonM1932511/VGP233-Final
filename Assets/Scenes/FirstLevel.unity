@@ -3210,7 +3210,7 @@ PrefabInstance:
       objectReference: {fileID: 1060340533}
     - target: {fileID: 6784799829814514694, guid: a50a7c1e0f6303048847bef919038f0e, type: 3}
       propertyPath: fightRange
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6784799829814514694, guid: a50a7c1e0f6303048847bef919038f0e, type: 3}
       propertyPath: moveSpeed

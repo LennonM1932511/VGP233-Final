@@ -68,7 +68,11 @@ public class BossNPC : MonoBehaviour
     private void Attack(Transform targetTransform)
     {
         agent.isStopped = true;
-        agent.transform.LookAt(targetTransform);
+        //agent.transform.LookAt(targetTransform);
+        var lookPos = targetTransform.position - transform.position;
+        lookPos.y = 0;
+        var rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 0.1f);
         if (!animator.GetAnimatorTransitionInfo(0).IsName("BossAttack"))
             animator.SetTrigger("isAttacking");
     }
