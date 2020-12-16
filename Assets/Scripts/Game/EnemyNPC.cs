@@ -50,7 +50,7 @@ public class EnemyNPC : MonoBehaviour
 
             if (hit.transform.name == "PlayerBody" || distance < chaseRange)
             {
-                if (distance < attackRange && hit.transform.name == "PlayerBody")
+                if (distance < attackRange || hit.transform.name == "PlayerBody")
                 {
                     animator.SetBool("isWalking", false);
                     animator.SetBool("isShooting", true);

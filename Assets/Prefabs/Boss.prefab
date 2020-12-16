@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3951815322330271062}
   detectionRange: 15
-  fightRange: 2
+  fightRange: 10
   moveSpeed: 10
   target: {fileID: 3874700955938945728, guid: cf451127749f81247b771d5407b0005b, type: 3}
 --- !u!1 &7664360787894750825
