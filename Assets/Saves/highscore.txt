@@ -1,1 +1,1 @@
-{"highScore":14179}
+{"highScore":7777}
